@@ -1,0 +1,28 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <h2>{{ strategy.titulo }}</h2>
+
+    <div class="emojis">
+        <div *ngFor="let emoji of emojis" (click)="formulario.get('avaliacao')?.setValue(emoji.faixa)"
+            [style.color]="formulario.get('avaliacao')?.value === emoji.faixa ? emoji.cor : 'inherit'"
+            [style.cursor]="'pointer'">
+            <span>{{ emoji.emoji }}</span>
+            <span>{{ emoji.rotulo }}</span>
+        </div>
+    </div>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Como você avalia?</mat-label>
+        <mat-select formControlName="feedbackRapido">
+            <mat-option *ngFor="let opcao of strategy.feedbackRapido" [value]="opcao">
+                {{ opcao }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Feedback</mat-label>
+        <textarea matInput formControlName="feedback"></textarea>
+    </mat-form-field>
+
+    <button mat-button type="submit">Enviar</button>
+</form>
